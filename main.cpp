@@ -52,8 +52,8 @@ int main(int argc, char *argv[])
 {
     cout << "fib of 10: " << fib(10) << endl;
     cout << "Sum of lines in file:" << sum("/Users/leo/Documents/hackerschool/coding-practice/test.txt") << endl;
-    run_linked_lists();
-//    do_trees();
-    run_strings();
+//    run_linked_lists();
+    do_trees();
+//    run_strings();
     return 0;
 }

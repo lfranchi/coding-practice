@@ -4,8 +4,17 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <string>
 
 using namespace std;
+
+struct TreeNode {
+    string val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(string val, TreeNode* left = 0, TreeNode* right = 0) : val(val), left(left), right(right) {}
+};
 
 int left(int i) {
     return 2*i + 1;
@@ -15,6 +24,13 @@ int right(int i) {
     return 2*i + 2;
 }
 
+TreeNode* left(TreeNode* n) {
+    return n->left;
+}
+
+TreeNode* right(TreeNode* n) {
+    return n->right;
+}
 
 vector<int> make_binary_tree(int numnodes) {
     vector<int> tree;
@@ -30,6 +46,63 @@ vector<int> make_binary_search_tree(int numnodes = 63) {
         tree.push_back(rand() % 100);
     }
     return tree;
+}
+
+TreeNode* make_node_tree() {
+    TreeNode* a = new TreeNode("a");
+    TreeNode* b = new TreeNode("b");
+    TreeNode* c = new TreeNode("c");
+    TreeNode* d = new TreeNode("d");
+    TreeNode* e = new TreeNode("e");
+    TreeNode* f = new TreeNode("f");
+    TreeNode* g = new TreeNode("g");
+    TreeNode* h = new TreeNode("h");
+
+    a->left = b;
+    a->right = c;
+
+    b->left = d;
+    b->right = e;
+    c->right = g;
+
+
+    e->left = f;
+
+    g->left = h;
+
+    return a;
+}
+
+TreeNode* make_isomorphic() {
+    TreeNode* a = new TreeNode("a");
+    TreeNode* b = new TreeNode("b");
+    TreeNode* c = new TreeNode("c");
+    TreeNode* d = new TreeNode("d");
+    TreeNode* e = new TreeNode("e");
+    TreeNode* f = new TreeNode("f");
+    TreeNode* g = new TreeNode("g");
+    TreeNode* h = new TreeNode("h");
+
+    a->left = c;
+    c->left = g;
+    g->right = h;
+
+    a->right = b;
+    b->left = e;
+    e->left = f;
+    b->right = d;
+
+    return a;
+}
+
+void print_inorder_nodetree(TreeNode* root) {
+    if (!root)
+        return;
+    if (root->left)
+        print_inorder_nodetree(root->left);
+    cout << root->val << " ";
+    if (root->right)
+        print_inorder_nodetree(root->right);
 }
 
 void print_tree(const vector<int>& tree) {
@@ -94,6 +167,30 @@ void find_nth_smallest(const vector<int>& t, int nth) {
     cout << "FINAL: " << tree[0] << endl;
 }
 
+bool is_isomorphic(TreeNode* tree1, TreeNode* tree2) {
+    if (!tree1 && !tree2)
+        return true;
+
+    if ((!tree1 && tree2) ||
+        (tree1 && !tree2))
+        return false;
+
+    if (tree1->val != tree2->val)
+        return false;
+
+    if (!tree1->left && !tree2->left)
+        return is_isomorphic(tree1->right, tree2->right);
+
+    if (tree1->left && tree2->left && tree1->left->val == tree2->left->val)
+        return is_isomorphic(tree1->left, tree2->left) &&
+               is_isomorphic(tree1->right, tree2->right);
+    else
+        return is_isomorphic(tree1->left, tree2->right) &&
+               is_isomorphic(tree1->right, tree2->left);
+}
+
+
+
 void do_trees() {
     vector<int> tree = make_binary_tree(15);
     vector<int> bst = make_binary_search_tree(31);
@@ -103,6 +200,14 @@ void do_trees() {
     find_nth_smallest(tree, 5);
 
     print_pretty_tree(bst);
+
+    cout << "Node-based trees: " << endl;
+    TreeNode* root = make_node_tree();
+    TreeNode* iso = make_isomorphic();
+    print_inorder_nodetree(root);
+    cout << endl;
+    print_inorder_nodetree(iso);
+    cout << endl << "isomorphic?" << is_isomorphic(root, iso) << endl;
 }
 
 #endif // TREES_HEAPS_H

@@ -119,6 +119,12 @@ bool has_cycle(Node* head) {
     return fast != 0;
 }
 
+Node* remove_duplicates(Node* head) {
+    // easy way n^2, go through list, for each node, try to find it in the rest ofthe list
+    // alternative: use hash table / set for seen elements, and compare (requires O(n) storage)
+    // alternative: sort the list, then remove duplicates. only works if we can change the list order though
+}
+
 // Doubly linked lists
 struct DNode {
     int val;
