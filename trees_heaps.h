@@ -190,6 +190,24 @@ bool is_isomorphic(TreeNode* tree1, TreeNode* tree2) {
 }
 
 
+TreeNode* find_lca(TreeNode* root, string val1, string val2) {
+    if (!root)
+        return 0;
+
+    if (root->val == val1 || root->val == val2)
+            return root;
+
+    TreeNode* leftLCA = find_lca(root->left, val1, val2);
+    TreeNode* rightLCA = find_lca(root->right, val1, val2);
+
+    if (leftLCA && rightLCA)
+        return root;
+
+    if (leftLCA)
+        return leftLCA;
+    else
+        return rightLCA;
+}
 
 void do_trees() {
     vector<int> tree = make_binary_tree(15);
@@ -208,6 +226,8 @@ void do_trees() {
     cout << endl;
     print_inorder_nodetree(iso);
     cout << endl << "isomorphic?" << is_isomorphic(root, iso) << endl;
+
+    cout << "LCA of E and F: " << find_lca(root, "e", "f")->val << endl;
 }
 
 #endif // TREES_HEAPS_H
