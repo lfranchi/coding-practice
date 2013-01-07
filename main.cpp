@@ -6,6 +6,7 @@
 #include "linkedlists.h"
 #include "trees_heaps.h"
 #include "strings.h"
+#include "dynamic_programming.h"
 
 using namespace std;
 

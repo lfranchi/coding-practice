@@ -18,9 +18,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     linkedlists.h \
-    strings.cpp
+    strings.cpp \
+    dynamic_programming.cpp
 
 HEADERS += \
     trees_heaps.h \
     strings.h \
-    utils.h
+    utils.h \
+    dynamic_programming.h
