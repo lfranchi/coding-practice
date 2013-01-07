@@ -49,11 +49,18 @@ int sum(const string& filename) {
     return max;
 }
 
-double sqrt_of_double(double num) {
-    double xn = num / 2.;
-    for(int i = 0; i < 10; i++) {
-//        xn = xn -
-    }
+double sqrt_of_double(double num)
+{
+    double previous = 0.0;
+    double approx = num;
+    do {
+        previous = approx;
+        approx = (0.5)*(approx + (num/approx));
+
+    } while( fabs( (approx * approx) - num ) > 0.0000000000001 );
+//    } while( fabs(previous - approx) < 0.000000001 );
+
+    return approx;
 }
 
 vector<int> merge(vector<vector<int> > arrays) {
@@ -95,8 +102,10 @@ int main(int argc, char *argv[])
     cout << "Sum of lines in file:" << sum("/Users/leo/Documents/hackerschool/coding-practice/test.txt") << endl;
 //    run_linked_lists();
 //    do_trees();
-    do_dp();
+//    do_dp();
 //    run_strings();
+
+    cout << "Square root of 2.532 should be: 1.591225942, our approx is: " << sqrt_of_double(2.532) << endl;
 
     vector<int> one, two, three;
     one.push_back(1);
