@@ -48,12 +48,73 @@ int sum(const string& filename) {
     return max;
 }
 
+double sqrt_of_double(double num) {
+    double xn = num / 2.;
+    for(int i = 0; i < 10; i++) {
+//        xn = xn -
+    }
+}
+
+vector<int> merge(vector<vector<int> > arrays) {
+    int len = 0;
+    for(auto v : arrays)
+        len += v.size();
+    vector<int> result(len);
+    int cur = 0;
+
+    vector<vector<int>::iterator> iters(arrays.size());
+    for(int i = 0; i < arrays.size(); i++) {
+        iters[i] = arrays[i].begin();
+    }
+
+    while(true) {
+        int smallest = INT_MAX; int smallest_idx;
+        for(int i = 0; i < iters.size(); i++) {
+            auto iter = iters[i];
+            if(iter != arrays[i].end() && *iter < smallest) {
+                smallest = *iter;
+                smallest_idx = i;
+            }
+        }
+        if (smallest == INT_MAX) // no more
+            break;
+
+        result[cur] = smallest;
+        cur++;
+
+        iters[smallest_idx] = ++iters[smallest_idx];
+    }
+
+    return result;
+}
+
 int main(int argc, char *argv[])
 {
     cout << "fib of 10: " << fib(10) << endl;
     cout << "Sum of lines in file:" << sum("/Users/leo/Documents/hackerschool/coding-practice/test.txt") << endl;
 //    run_linked_lists();
-    do_trees();
+//    do_trees();
+    do_dp();
 //    run_strings();
+
+    vector<int> one, two, three;
+    one.push_back(1);
+    one.push_back(3);
+    one.push_back(5);
+    two.push_back(2);
+    two.push_back(4);
+    two.push_back(6);
+    three.push_back(3);
+    three.push_back(5);
+    three.push_back(7);
+    vector<vector<int> > tomerge;
+    tomerge.push_back(one);
+    tomerge.push_back(two);
+    tomerge.push_back(three);
+    auto result = merge(tomerge);
+    cout << "Merged arrays! Should be sorted: ";
+    for(auto i : result) cout << i << " ";
+    cout << endl;
+
     return 0;
 }
