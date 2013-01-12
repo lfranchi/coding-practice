@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# This file comes from Darius Bacon to be used as reference. Thanks!
+
 # A tree is either () or (left, val, right).
 
 T = (((),'a',()),  'b',  ( ((),'c',()), 'd', ()))
